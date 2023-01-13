@@ -1,5 +1,7 @@
 package com.prowings.empcrud.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public Employee getEmployeeById(int id) {
 		return dao.getEmployeeById(id);
+	}
+
+	@Override
+	public List<Employee> getAllEmployees() {
+		return dao.getAllEmployees();
 	}
 
 }

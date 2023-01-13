@@ -12,8 +12,12 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @Configuration
 @ComponentScan(basePackages = "com.prowings.empcrud")
@@ -54,5 +58,18 @@ public class SpringMvcConfig {
         return properties;
     }
 
-
+    @Bean  // needed for JSON conversion of bean responses
+    public View jsonTemplate() {
+        MappingJackson2JsonView view = new MappingJackson2JsonView();
+        Properties props = new Properties();
+        props.put("order", 1);
+        view.setAttributes(props);
+        view.setPrettyPrint(true);
+        return view;
+    }
+    
+    @Bean
+    public ViewResolver viewResolver() {
+        return new BeanNameViewResolver();
+    }
 }

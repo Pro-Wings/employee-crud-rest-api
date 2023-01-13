@@ -2,9 +2,14 @@ package com.prowings.empcrud.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Employee implements Serializable{
@@ -17,6 +22,8 @@ public class Employee implements Serializable{
 	String name;
 	@Column
 	String department;
+	@Embedded
+	Address address;
 	
 	public Employee() {
 		super();
@@ -40,11 +47,15 @@ public class Employee implements Serializable{
 	public void setDepartment(String department) {
 		this.department = department;
 	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", department=" + department + "]";
+		return "Employee [id=" + id + ", name=" + name + ", department=" + department + ", address=" + address + "]";
 	}
 	
-	
-
 }
